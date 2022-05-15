@@ -36,7 +36,7 @@ public class Main {
                     int multiplication = Integer.parseInt(strings[1]) * Integer.parseInt(strings[3]);
                     return "" + multiplication;
                 }
-            };
+            }
             return strings[2];
         } else if (strings[0].equals("I")) {
 
@@ -46,24 +46,14 @@ public class Main {
             Integer number_1 = Integer.parseInt(roman_numerals.get(strings[1]));
             Integer number_2 = Integer.parseInt(roman_numerals.get(strings[3]));
             switch (strings[2]) {
-                case "+" -> {
-                    suma = String.valueOf(number_1 + number_2);
-                    break;
-                }
-                case "-" -> {
-                    suma = String.valueOf(number_1 - number_2);
-                    break;
-                }
-                case "/" -> {
-                    suma = String.valueOf((int) Math.round(number_1 / number_2));
-                    break;
-                }
-                case "*" -> {
-                    suma = String.valueOf(number_1 * number_2);
-                    break;
-
-                }
-            };
+                case "+" -> suma = String.valueOf(number_1 + number_2);
+                case "-" -> suma = String.valueOf(number_1 - number_2);
+                case "/" -> suma = String.valueOf((int) Math.round(number_1 / number_2));
+                case "*" -> suma = String.valueOf(number_1 * number_2);
+            }
+            if (suma.equals("0")) {
+                throw new Exception("т.к. в римской системе нет числа 0");
+            }
             if (suma.matches("\\d{3}")) {
                 return "C";
             } else if (suma.matches("\\d{2}") && Integer.parseInt(suma) > 10) {
@@ -77,7 +67,6 @@ public class Main {
         }
 
     }
-
     public static String system(String inputSystem) throws Exception {
 
         if (inputSystem == null || inputSystem.equals("") || inputSystem.matches("\\s")) {
@@ -117,44 +106,43 @@ public class Main {
     }
 
     public static String functionBig(String s) {
-
-        TreeMap<String, String> roman_numerals = mapBig();
-        Integer itogo = Integer.parseInt(s);
-        String number = "" + (itogo % 10);
+        TreeMap<String, String> roman_numerals = mapSmall();
+        roman_numerals.putAll(mapBig());
+        int sum = Integer.parseInt(s);
+        String number = "" + (sum % 10);
         if (roman_numerals.containsValue(s)) {
             return functionSmall(s, roman_numerals);
         }
-        for (int i = 11; i <= itogo; i++) {
-            if (i < 21 && itogo == i) {
+        for (int i = 11; i <= sum; i++) {
+            if (i < 21 && sum == i) {
                 return "X" + functionSmall(number, roman_numerals);
-            } else if (i < 31 && i >= 21 && itogo == i) {
+            } else if (i < 31 && i >= 21 && sum == i) {
                 return "XX" + functionSmall(number, roman_numerals);
-            } else if (i < 41 && i >= 31 && itogo == i) {
+            } else if (i < 41 && i >= 31 && sum == i) {
 
                 return "XXX" + functionSmall(number, roman_numerals);
-            } else if (i < 51 && i >= 41 && itogo == i) {
+            } else if (i < 51 && i >= 41 && sum == i) {
 
                 return "XL" + functionSmall(number, roman_numerals);
-            } else if (i < 61 && i >= 51 && itogo == i) {
+            } else if (i < 61 && i >= 51 && sum == i) {
 
                 return "L" + functionSmall(number, roman_numerals);
-            } else if (i < 71 && i >= 61 && itogo == i) {
+            } else if (i < 71 && i >= 61 && sum == i) {
 
                 return "LX" + functionSmall(number, roman_numerals);
-            } else if (i < 81 && i >= 71 && itogo == i) {
+            } else if (i < 81 && i >= 71 && sum == i) {
 
                 return "LXX" + functionSmall(number, roman_numerals);
-            } else if (i < 91 && i >= 81 && itogo == i) {
+            } else if (i < 91 && i >= 81 && sum == i) {
 
                 return "LXXX" + functionSmall(number, roman_numerals);
-            } else if (i < 100 && i >= 91 && itogo == i) {
+            } else if (i < 100 && i >= 91 && sum == i) {
 
                 return "XC" + functionSmall(number, roman_numerals);
             }
         }
         return null;
     }
-
     public static String functionSmall(String s, TreeMap<String, String> roman_numerals) {
         for (Map.Entry<String, String> o : roman_numerals.entrySet()) {
             String key = o.getKey();
@@ -165,19 +153,8 @@ public class Main {
         }
         return "";
     }
-
     public static TreeMap<String, String> mapBig() {
         TreeMap<String, String> roman_numerals = new TreeMap<>();
-        roman_numerals.put("I", "1");
-        roman_numerals.put("II", "2");
-        roman_numerals.put("III", "3");
-        roman_numerals.put("IV", "4");
-        roman_numerals.put("V", "5");
-        roman_numerals.put("VI", "6");
-        roman_numerals.put("VII", "7");
-        roman_numerals.put("VIII", "8");
-        roman_numerals.put("IX", "9");
-        roman_numerals.put("X", "10");
         roman_numerals.put("XX", "20");
         roman_numerals.put("XXX", "30");
         roman_numerals.put("XL", "40");
@@ -188,7 +165,6 @@ public class Main {
         roman_numerals.put("XC", "90");
         return roman_numerals;
     }
-
     public static TreeMap<String, String> mapSmall() {
         TreeMap<String, String> roman_numerals = new TreeMap<>();
         roman_numerals.put("I", "1");
