@@ -105,7 +105,7 @@ public class Main {
         }
     }
 
-    public static String functionBig(String s) {
+    public static String functionBig(String s) throws Exception {
         TreeMap<String, String> roman_numerals = mapSmall();
         roman_numerals.putAll(mapBig());
         int sum = Integer.parseInt(s);
@@ -141,9 +141,9 @@ public class Main {
                 return "XC" + functionSmall(number, roman_numerals);
             }
         }
-        return null;
+        throw new Exception("Ошибка, ошибка, ошибочка");
     }
-    public static String functionSmall(String s, TreeMap<String, String> roman_numerals) {
+    public static String functionSmall(String s, TreeMap<String, String> roman_numerals) throws Exception {
         for (Map.Entry<String, String> o : roman_numerals.entrySet()) {
             String key = o.getKey();
             String value = o.getValue();
@@ -151,7 +151,7 @@ public class Main {
                 return key;
             }
         }
-        return "";
+        throw new Exception("Ошибка, ошибка, ошибочка");
     }
     public static TreeMap<String, String> mapBig() {
         TreeMap<String, String> roman_numerals = new TreeMap<>();
