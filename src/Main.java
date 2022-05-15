@@ -35,11 +35,8 @@ public class Main {
                 case "*" -> {
                     int multiplication = Integer.parseInt(strings[1]) * Integer.parseInt(strings[3]);
                     return "" + multiplication;
-
                 }
-
-            }
-            ;
+            };
             return strings[2];
         } else if (strings[0].equals("I")) {
 
@@ -66,8 +63,7 @@ public class Main {
                     break;
 
                 }
-            }
-            ;
+            };
             if (suma.matches("\\d{3}")) {
                 return "C";
             } else if (suma.matches("\\d{2}") && Integer.parseInt(suma) > 10) {
@@ -102,7 +98,6 @@ public class Main {
                     "два операнда и один оператор (+, -, /, *)");
         }
         if (arabic_numerals.contains(strings[0]) && arabic_numerals.contains(strings[2])) {
-            System.out.println("arabic_numerals");
             return "1" + " " + inputSystem;
         }
 
@@ -112,7 +107,6 @@ public class Main {
                     Integer.parseInt(roman_numerals.get(strings[0])) < Integer.parseInt(roman_numerals.get(strings[2]))) {
                 throw new Exception("т.к. в римской системе нет отрицательных чисел");
             }
-            System.out.println("roman_numerals");
             return "I" + " " + inputSystem;
         } else if (roman_numerals.containsKey(strings[0]) && arabic_numerals.contains(strings[2]) ||
                 roman_numerals.containsKey(strings[2]) && arabic_numerals.contains(strings[0])) {
